@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 Movie Recommendation System</h1>
+        <form method="POST">
+            <label for="types">Choose a Type:</label>
+            <select name="types" id="types">
+                <option value="action" {% if request.form.get("types") == "action" %}selected{% endif %}>Action</option>
+                <option value="comedy" {% if request.form.get("types") == "comedy" %}selected{% endif %}>Comedy</option>
+                <option value="drama" {% if request.form.get("types") == "drama" %}selected{% endif %}>Drama</option>
+                <option value="crime" {% if request.form.get("types") == "crime" %}selected{% endif %}>Crime</option>
+                <option value="sci-fi" {% if request.form.get("types") == "sci-fi" %}selected{% endif %}>Sci-Fi</option>
+                <option value="horror" {% if request.form.get("types") == "horror" %}selected{% endif %}>Horror</option>
+            </select>
+            
+           
+            <button type="submit">Get Recommendation</button>
+        </form>
+
+        {% if recommend %}
+            <p class="result">🎥 You can watch: <strong>{{ recommend }}</strong></p>
+        {% endif %}
+        {% if error_message %}
+            <p class="error">{{ error_message }}</p>
+        {% endif %}
+
+    </div>
+</body>
+</html>
